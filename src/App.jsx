@@ -1,35 +1,28 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import "./index.css";
+import React from "react";
+import {useSelector} from 'react-redux';
+import Category from "./components/category/Category";
+import TodoForm from "./components/TodoForm";
+import Footer from "./components/Footer";
+
+
 
 function App() {
-  const [count, setCount] = useState(0)
-
+  const todosItem = useSelector((state) => state.todos.todosList);
   return (
-    <>
-      <div>
-        <a href="https://vitejs.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
+    <div className="w-full min-h-screen pt-4 font-bodyFont bg-gradient-to-t from-pink-600 via-pink-400 to-pink-300 text-white px-4 flex flex-col gap-10 justify-center items-center">
+       {
+        todosItem.length>0?  <Category />:""
+      }
+      <div className="w-[850px] h-full bg-bodyColor p-10 flex flex-col gap-10">
+      <TodoForm />
+      <Footer/>
       </div>
-      <h1 className='bg-red-400 text-white text-2xl font-bold'>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p className=' bg-pink-300'>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
-  )
+    </div>
+  );
 }
 
-export default App
+export default App;
+
+
+
